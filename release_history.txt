@@ -1,0 +1,211 @@
+# 1.1.7
+Important: The network protocol of 1.1.7 is incompatible with previous versions. This means
+you have to update your backend plugin after you've upgraded to 1.1.7.
+
+- Added built in NavMeshAgent component.
+- Added support for statically typed collision signals for entities.
+- Added support for time dilation in the client to slow down time if one of the clients cant keep up (off by default).
+- Added Transform2DVertical component (extrusion-based 3D collision checks for the 2D physics engine - bodies may have height and vertical position - collisions are solved in 2D space);
+- Implement IEnumerable<T> to DynamicHits and Buffer<T> classes to allow iteration using linq/foreach.
+- Fixed a bug with iOS builds where the memcpy reference for Nintendo Switch would be included causing build errors.
+
+# 1.1.6
+Important: You must have upgraded your project and server plugin to 1.1.4 before applying the 1.1.6 upgrade.
+
+- New Platform:
+
+    Quantum now supports Nintendo Switch.
+
+- Breaking Change:
+
+    GridSize and GridNodeSize on the map asset have both been restricted with the following checks:
+      - Has to be an even number
+      - Has to be greater than or equal to 2
+
+- Removed all calls to Quantum.Profiler from internal code.
+- Added DB.AddAsset(Frame f, AssetObject asset) to allow adding assets to the database during runtime.
+- Added OverlapShape which allows you to perform overlaps using an arbitrary physics shape.
+- Added Frame.EntityExists method to check if an EntityRef is valid
+- Added Frame.<EntityType>Exists methods to check if an <EntityType>EntityRef is valid.
+- Added NullableFPVector2 and NullableFPVector3.
+- Added FPVector2.MoveTowards and FPVector3.MoveTowards
+- Added EntityRef.None field to ease clearing out entity refs.
+- Added <EntityType>EntityRef.None field to ease clearing out entity refs for a specific entity type.
+- Added EntityPrefabRoot.EntityRef field to make it easier to access an entity from an instantiated prefab.
+- Added #pragma warning disable for the empty switch warning in the generated code.
+- Nullable FP, FPVector2 and FPVector3 are now usable from the DSL by default. Use FP?, FPVector2? and FPVector3?.
+- EntityRef now implements == and != operators.
+- <EntityType>EntityRef now implements == and != operators.
+- <EntityType>EntityRef now overrides Equals(Object obj).
+- <EntityType>EntityRef now implements the IEquatable<T> interface.
+- Fixed issue with lexer not parsing negative numbers correctly.
+- Fixed issue in FPVector3.Lerp where it would pass clamp arguments in the wrong order.
+- Fixed issue with 64bit iOS 11.0+ builds.
+
+# 1.1.5
+Important: You must have upgraded your project and server plugin to 1.1.4 before applying the 1.1.5 upgrade.
+
+- Breaking Change:
+
+    The collision signal API has been reworked, we now provide four signal interfaces:
+
+    ISignalOnCollisionDynamic
+    ISignalOnCollisionStatic
+    ISignalOnTriggerDynamic
+    ISignalOnTriggerStatic
+
+    Any code that previously used the ISignalOnCollision interface needs to be updated to 
+    use either ISignalOnCollisionDynamic or ISignalOnCollisionStatic instead.
+
+- Breaking Change:
+
+    StaticTriggerData struct has been renamed to StaticColliderData.
+
+- Breaking Change:
+	
+    In the inspector for the quantum static colliders in Unity the field named 'Trigger Asset' has been renamed to 
+    just 'Asset' as it's now available for non-trigger collisions with static colliders also.
+
+- Breaking Change:
+
+    Trigger callbacks are now invoked for these cases also:
+
+        * Static Collider <> Kinematic Trigger
+        * Kinematic Collider <> Static Trigger
+        * Kinematic Collider <> Kinematic Trigger
+
+- Added ability to define constants in .qtn files with the '#define <name> <value>' syntax. Currently only integer constants are supported.
+- Added StaticColliderData to DynamicHit struct to provide access to information about the static collider you hit with a raycast or overlap.
+- Added StaticColliderData.ColliderId so each static collider can be uniquely identified during runtime.
+- Added StaticColliderData.IsTrigger to allow for checking if a static collider is a trigger or not in a trigger callback.
+- Added OnEntityCreated and EntityDestroy signal which are invoked whenever an entity is created or destroyed.
+- Added On<EntityType>Created and On<EntityType>Destroy signal which are invoked whenever an entity of <EntityType> is created or destroyed.
+- Added setting 'Expose Verified Status In Simulation' which allows you to query the Frame.IsVerified and Frame.IsPredicted state inside the simulation.
+- Deprecated DynamicHit.entity and DynamicHit.point, use DynamicHit.Entity and DynamicHit.Point instead.
+- Implemented proper GetHashCode methods for generated types to reduce hash collisions in event system.
+- Improved the event dispatcher on the Unity side to reduce hash collisions.
+- Improved performance of signal callbacks.
+- Improved performance of array methods.
+- Removed obsolete DynamicBody.InitStatic methods, use the new DynamicBody.InitKinematic methods instead.
+- Removed obsolete AssetLink.Asset property, use the new AssetLink.Instance property instead.
+- Fixed issues with 'Skip Rollbacks When Possible' setting, it should now work properly.
+- Fixed issue with static collider broadphase init using too much CPU during runtime.
+- Fixed issue with synced events being invoked multiple times in some cases.
+- Fixed last remaining issues with QUANTUM_XY script define symbol.
+- Fixed issue with transparency not being used with the Quantum.Draw methods.
+- Fixed bug in polygon<>circle collision code.
+- Fixed issue where signals with no arguments would generate invalid C#.
+- Fixed issue where signals would be invoked on disabled systems.
+- Fixed bug in generated IL code which would cause IL2CPP on iOS to not build.
+
+# 1.1.4
+Important: The network protocol of 1.1.4 is incompatible with previous versions. This means
+you have to update your backend plugin after you've upgraded to 1.1.4.
+
+- Massive physics performance improvements.
+- Exposed DynamicBody.PhysicsMaterial property.
+- Exposed DynamicBody.IsKinematic property.
+- Exposed Replay API via the IDeterministicReplayProvider interface which can be set on the RuntimeConfig object.
+- Removed the obsolete Frame.GameConfig property, use the Frame.RuntimeConfig property instead.
+- Renamed DynamicBody.InitStatic to DynamicBody.InitKinematic, InitStatic is marked as obsolete.
+- Added Quantum.LayerMask which mimics the behaviour of the LayerMask struct in Unity.
+- Added ability to run the Quantum simulation in a background thread, currently marked as experimental.
+- Added 'Aggressive Send Mode' to the quantum configuration options, see settings inspector for more details.
+- Added #pragma syntax to DSL for setting compiler directives. 
+- Added UnityDB.FindAsset<T>(AssetObject asset) to make it easier to get a unity asset from a quantum AssetObject.
+- Added InitUser(), FreeUser(), AllocUser(), CopyFromUser(Frame frame) to allow easy extension of the Frame class from a partial user defined implementation.
+- Added IEntityManifoldFilter which lets you filter collision manifolds for entities and disable collisions between certain entities.
+- Fixed issue with lockstep input replication which could cause a lot of simulation stalling.
+- Fixed issue with Polygon<>Box collisions causing them to not be calculated.
+- Fixed issue with invalid input data throwing array out of range exceptions.
+- Fixed issue with DynamicShapeConfig property drawer not having the correct height for 'None' and 'Box' collider types.
+- Fixed issue where you could invoke methods on null pointers without getting a null reference exception.
+- Fixed issue with not being able to create arrays out of asset_ref<T> types.
+- Fixed issue in IL patcher where it would remove Assert calls for array accessor methods.
+- Fixed issue where release mode dll's build with mono toolchain would make IL patcher produce invalid IL.
+- Fixed issue with clock synchronizer which could lead to prediction count being high on some clients.
+- Fixed issue with DeterministicInputFlags not being correct for input sets which were received before local client had simulated the frame for those inputs.
+- Fixed memory leak in lockstep simulator caused by no input sets ever being recycled and re-used.
+- Fixed issue where checksums callbacks would not be invoked when running with lockstep simulator.
+- Fixed issue in network communicator call-order which could cause inputs to be delayed more than necessary.
+- Fixed issue with input insertion when local input offset changed that could cause prediction spikes on remote clients.
+- Fixed some issues related to switching quantum to the XY plane in unity with the QUANTUM_XY script define symbol.
+- Fixed issue in code generator which allowed pointer types to be declared where not valid.
+- Fixed issue in code generator which allowed the use of the nothashed keyword where not applicable.
+- Fixed issue with importing animations that only has scale animation.
+- Fixed null ref being thrown by the DB class when an asset link struct with a null guid was passed in.
+
+# 1.1.3
+- Added Lockstep mode that allows the quantum simulation to be run without rollbacks and predictions.
+- Added [AssetObjectConfig] attribute to allow customization of the unity code generation for asset classes.
+- Fixed issue where 'Rollback Window' setting was locked to the same as 'Simulation Rate'.
+- Fixed issue in generated code that would cause a rare null-ref when calling GetEntity(EntityRef entity_ref)
+- Fixed issue with MapDataBaker API where it would not always load the math lookup tables when in editor.
+- Fixed array index out of range issue in NavMeshPathFinder that could occur in rare cases.
+- Fixed issue with simulator that could in very rare cases hang client in an infinite loop.
+- Fixed issue with animator not exporting speed parameter.
+- Fixed issue with some transitions in animator not triggering.
+- Fixed issue with 'Can Transition To Self' not being respected on Any State transitions in animator.
+- Fixed potential null ref from QuantumRunner.OnDestroy call.
+- Fixed issue with RuntimePlayer object order being incorrect compared to the PhotonPlayer order they were created for.
+
+# 1.1.2
+- Entities driven by physics are now clamped to the playable area.
+- Added new type 'DynamicShapeConfig' which can be used inside quantum assets classes to setup a collider type that can later be used during runtime.
+- Added new overloads for DynamicBody.InitDynamic and DynamicBody.InitStatic that take the new 'DynamicShapeConfig' as first parameter.
+- Added DynamicBody.Enabled property to check enabled status of a body.
+- Added AssetLink.Instance property, deprecated AssetLink.Asset property.
+- Added support for root motion to animator. Mecanim AnimationControllers need to be reimported.
+- Added "Local" game mode, which allows the Quantum to run locally with several players for games which require split screen, etc. 
+- Added debug gizmos for dynamic colliders.
+- Removed "Singleplayer" game mode, replaced with "Local" game mode with one player.
+- Fixed some issues with the DeterminsticConfig asset inspector not allowing certain valid values to be set.
+- Fixed issue with static broadphase for physics causing box colliders to not be added to broadphase correctly.
+- Fixed issue with missing property drawer for AnimatorGraphLink struct.
+- Fixed issue with missing property drawer for PolygonColliderLink struct.
+- Fixed issue with static colliders not respecting their scale when they were baked to map data.
+- Fixed issue with event dispatcher that could cause an infinite loop.
+- Fixed issue with GetAll[ComponentName] method calls always returning a zero count.
+- Fixed issue with the navmesh pathfinder sometimes causing allocations.
+
+# 1.1.1
+- Massive improvement in physics performance for static colliders.
+- QuantumCallback method for map changing is now properly named OnMapChangeBegin.
+- Entire MapData bake API is now usable during runtime.
+- Implemented MapDataBakerCallback base class for easy extension of the map data baking API.
+- Added FPBounds2 struct for 2D bounds calculations.
+- Signals now include the Frame as the first parameter.
+- Added RaiseCollisionEventsForStatics to physics settings to allow toggling of collision callbacks for static colliders.
+- Added missing QuantumStaticColliderBox2D script for baking static box colliders.
+- Added missing method DynamicBody.AddTorque.
+- Added DynamicBody.AddAngularImpulse.
+- Added DynamicBody.Enable, DynamicBody.Disable and DynamicBody.Destroy
+- Added relative point parameter to DynamicBody.AddForce and DynamicBody.AddLinearImpulse.
+- DynamicBody.IsTrigger is now public so it can be set from code.
+- Improved performance of linecast and raycast against box colliders.
+- Exposed QuantumGame.RuntimeConfig and QuantumGame.SimulationConfig as static properties.
+- Exposed Frame.SimulationRate that holds the current update rate of the simulation.
+- Deprecated Frame.GameConfig, use the new Frame.RuntimeConfig instead.
+- Added QuantumGame.FrameInterpolationFactor which provides a normalized value to use for interpolating between the two latest predicted frame.
+- Added position interpolation between frames to EntityPrefabViewUpdater.
+- EntityPrefabViewUpdater now instantiates prefabs at the correct transform position.
+- Added RNGSession.Next(FP min, FP max), RNGSession.Next(Int32 min, Int32 max) and RNGSession.HighPrecisionInteger(Int32 precision)
+- Added temporary error log to FPVector2.Normalize to try to track down issue where the square magnitude of a vector turns into a negative value.
+- Destroying entities are now deferred until all Systems have executed.
+- Renamed Frame.EntityGet to Frame.GetEntity.
+- Layer collision matrix is now imported from the Unity Physics settings.
+- Fixed error spam when creating a new AnimatorGraph asset.
+- Fixed a bug where layers would not be checked before collision was resolved for two bodies.
+- Fixed a bug with baking static colliders that would invert their rotation.
+- Fixed a bug with ToFPRotation2D extension method that inverted the rotation.
+- Fixed a bug in the code generator related to complex array types.
+- Fixed a bug in Animator updater where it would not use the correct delta time.
+- Fixed a bug in DynamicScene.OverlapCircle causing it to always intersect all Box colliders.
+- Fixed a bug where the Animation "Any State" was not working. Mecanim AnimationControllers need to be reimported.
+
+# 1.1
+- Initial ECS Release
+
+# 1.0
+- Initial Quantum Release
+

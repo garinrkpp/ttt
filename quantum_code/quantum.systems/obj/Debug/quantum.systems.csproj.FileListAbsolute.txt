@@ -1,0 +1,12 @@
+/Users/garin/Downloads/Photon-Quantum-Sdk_v1-1-7/quantum_unity/Assets/Plugins/quantum.systems.dll
+/Users/garin/Downloads/Photon-Quantum-Sdk_v1-1-7/quantum_unity/Assets/Plugins/quantum.systems.pdb
+/Users/garin/Downloads/Photon-Quantum-Sdk_v1-1-7/quantum_code/quantum.systems/obj/Debug/quantum.systems.csprojResolveAssemblyReference.cache
+/Users/garin/Downloads/Photon-Quantum-Sdk_v1-1-7/quantum_code/quantum.systems/obj/Debug/quantum.systems.csproj.CoreCompileInputs.cache
+/Users/garin/Downloads/Photon-Quantum-Sdk_v1-1-7/quantum_code/quantum.systems/obj/Debug/quantum.systems.dll
+/Users/garin/Downloads/Photon-Quantum-Sdk_v1-1-7/quantum_code/quantum.systems/obj/Debug/quantum.systems.pdb
+/Users/garin/Desktop/Photon-Quantum-Sdk_v1-1-7/quantum_unity/Assets/Plugins/quantum.systems.dll
+/Users/garin/Desktop/Photon-Quantum-Sdk_v1-1-7/quantum_unity/Assets/Plugins/quantum.systems.pdb
+/Users/garin/Desktop/Photon-Quantum-Sdk_v1-1-7/quantum_code/quantum.systems/obj/Debug/quantum.systems.csprojResolveAssemblyReference.cache
+/Users/garin/Desktop/Photon-Quantum-Sdk_v1-1-7/quantum_code/quantum.systems/obj/Debug/quantum.systems.csproj.CoreCompileInputs.cache
+/Users/garin/Desktop/Photon-Quantum-Sdk_v1-1-7/quantum_code/quantum.systems/obj/Debug/quantum.systems.dll
+/Users/garin/Desktop/Photon-Quantum-Sdk_v1-1-7/quantum_code/quantum.systems/obj/Debug/quantum.systems.pdb

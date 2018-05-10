@@ -1,0 +1,7 @@
+1. Close Unity/Visual Studio Instances
+2. Delete old tools and assemblies folders
+3. Unzip tools_and_assemblies.zip in project root
+4. Unzip quantum_code.zip inside the quantum_code folder
+5. Open quantum_code.sln and build quantum.systems project
+6. Open Unity Project
+7. Import quantum_unity.unitypackage into the unity project

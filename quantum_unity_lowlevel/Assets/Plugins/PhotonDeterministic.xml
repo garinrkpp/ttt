@@ -1,0 +1,1569 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PhotonDeterministic</name>
+    </assembly>
+    <members>
+        <member name="T:Photon.Deterministic.DeterministicPlayer">
+             @brief An internal representation of a player.
+            
+        </member>
+        <member name="F:Photon.Deterministic.DeterministicPlayer.playerInfo">
+             @brief Player's basic info.
+            
+        </member>
+        <member name="F:Photon.Deterministic.DeterministicPlayer.dropCount">
+             @brief How many drop calls this player got.
+            
+        </member>
+        <member name="F:Photon.Deterministic.DeterministicPlayer.dropped">
+             @brief It is true if this player got dropped.
+            
+        </member>
+        <member name="F:Photon.Deterministic.DeterministicPlayer.sentSyncedStart">
+             @brief It is true if this player sent a mandatory first message.
+            
+        </member>
+        <member name="F:Photon.Deterministic.DeterministicPlayer.controls">
+             @brief Gets a string value.
+            
+        </member>
+        <member name="P:Photon.Deterministic.DeterministicPlayer.ID">
+             @brief Player's id.
+            
+        </member>
+        <member name="M:Photon.Deterministic.DeterministicPlayer.IsDataReady(System.Int32)">
+             @brief Returns true if there is valid input data for the provided tick.
+            
+        </member>
+        <member name="M:Photon.Deterministic.DeterministicPlayer.IsDataDirty(System.Int32)">
+             @brief Returns true if the input data for the provided tick is dirty.
+            
+        </member>
+        <member name="M:Photon.Deterministic.DeterministicPlayer.GetData(System.Int32)">
+             @brief Returns a {@link SyncedData} for the provided tick.
+             
+             If there is no input data in the provided tick a fake {@link SyncedData} is created and returned.
+            
+        </member>
+        <member name="M:Photon.Deterministic.DeterministicPlayer.AddData(Photon.Deterministic.SyncedData)">
+             @brief Adds a {@link SyncedData} to input data (default mode).
+            
+        </member>
+        <member name="M:Photon.Deterministic.DeterministicPlayer.AddData(System.Collections.Generic.List{Photon.Deterministic.SyncedData})">
+             @brief Adds an array of {@link SyncedData} to input data (default mode).
+            
+        </member>
+        <member name="M:Photon.Deterministic.DeterministicPlayer.RemoveData(System.Int32)">
+             @brief Removes input data of the provided tick.
+            
+        </member>
+        <member name="M:Photon.Deterministic.DeterministicPlayer.AddDataProjected(System.Int32,System.Int32)">
+             @brief From the provided tick projects {@link SyncedData} througout the provided window.
+            
+        </member>
+        <member name="M:Photon.Deterministic.DeterministicPlayer.AddDataRollback(Photon.Deterministic.SyncedData)">
+             @brief Adds an array of {@link SyncedData} to input data (rollback mode).
+            
+        </member>
+        <member name="T:Photon.Deterministic.DeterministicPlayerInfo">
+             @brief Player's basic info.
+            
+        </member>
+        <member name="F:Photon.Deterministic.DeterministicPlayerInfo.id">
+             @brief Player's id.
+            
+        </member>
+        <member name="F:Photon.Deterministic.DeterministicPlayerInfo.name">
+             @brief Player's name.
+            
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:Photon.Deterministic.GenericBufferWindow`1" -->
+        <member name="F:Photon.Deterministic.GenericBufferWindow`1.buffer">
+             @brief Array containing every element of the buffer.
+            
+        </member>
+        <member name="F:Photon.Deterministic.GenericBufferWindow`1.size">
+             @brief Size of the buffer.
+            
+        </member>
+        <member name="F:Photon.Deterministic.GenericBufferWindow`1.currentIndex">
+             @brief Index pointing to current element.
+            
+        </member>
+        <member name="M:Photon.Deterministic.GenericBufferWindow`1.#ctor(System.Int32)">
+             @brief Creates a buffer based on the provided size and instantiates a empty T instance to fill this buffer.
+            
+        </member>
+        <member name="M:Photon.Deterministic.GenericBufferWindow`1.#ctor(System.Int32,Photon.Deterministic.GenericBufferWindow{`0}.NewInstance)">
+             @brief Creates a buffer based on the provided size and instantiates a empty T instance to fill this buffer.
+            
+        </member>
+        <member name="M:Photon.Deterministic.GenericBufferWindow`1.Resize(System.Int32)">
+             @brief Changes the size of the buffer keeping the newest objects.
+            
+        </member>
+        <member name="M:Photon.Deterministic.GenericBufferWindow`1.Set(`0)">
+             @brief Sets a provided instance as the new element of the buffer's current position.
+            
+        </member>
+        <member name="M:Photon.Deterministic.GenericBufferWindow`1.Previous">
+             @brief Changes {@link #currentIndex} to previous position.
+            
+        </member>
+        <member name="M:Photon.Deterministic.GenericBufferWindow`1.Previous(System.Int32)">
+             @brief Changes {@link #currentIndex} to previous position.
+            
+        </member>
+        <member name="M:Photon.Deterministic.GenericBufferWindow`1.Current">
+             @brief Returns the current element of the buffer.
+            
+        </member>
+        <member name="M:Photon.Deterministic.GenericBufferWindow`1.MoveNext">
+             @brief Changes {@link #currentIndex} to next position.
+            
+        </member>
+        <member name="M:Photon.Deterministic.GenericBufferWindow`1.MoveNext(System.Int32)">
+             @brief Changes {@link #currentIndex} to next position.
+            
+        </member>
+        <member name="T:Photon.Deterministic.OnEventReceived">
+             @brief Represents a callback to handle received custom events.
+            
+        </member>
+        <member name="T:Photon.Deterministic.ICommunicator">
+             @brief TrueSync's communicator interface.
+            
+        </member>
+        <member name="M:Photon.Deterministic.ICommunicator.RoundTripTime">
+             @brief Returns the roundtrip time between local player and server.
+            
+        </member>
+        <member name="M:Photon.Deterministic.ICommunicator.ServerTime">
+             @brief Returns the server time in seconds.
+            
+        </member>
+        <member name="M:Photon.Deterministic.ICommunicator.OpRaiseEvent(System.Byte,System.Object,System.Boolean,System.Int32[])">
+             @brief Raises a custom event to be sent to all other players.
+             
+             @param eventCode Code of the custom event
+             @param message Message to be sent in event's body
+             @param reliable If true it should have a guaranteed delivery
+            
+        </member>
+        <member name="M:Photon.Deterministic.ICommunicator.AddEventListener(Photon.Deterministic.OnEventReceived)">
+             @brief Adds an event listener to handle received custom events.
+             
+             @param onEventReceived Implementation of {@link OnEventReceived} delegate.
+            
+        </member>
+        <member name="M:Photon.Deterministic.ICommunicator.RemoveEventListener">
+             @brief Removes the latest event listener added.
+             
+            
+        </member>
+        <member name="T:Photon.Deterministic.InputDataBase">
+             @brief Provides information about a player's inputs.
+            
+        </member>
+        <member name="F:Photon.Deterministic.InputDataBase.ownerID">
+             @brief Player's id.
+            
+        </member>
+        <member name="M:Photon.Deterministic.ResourcePool.CleanUpAll">
+             @brief Clean up references to be collected by gc.
+            
+        </member>
+        <member name="T:Photon.Deterministic.ResourcePool`1">
+            <summary>
+            A thread safe resource pool.
+            </summary>
+            <typeparam name="T">The type of the object to cache. The type T must
+            have a parameterless constructor.</typeparam>
+        </member>
+        <member name="M:Photon.Deterministic.ResourcePool`1.#ctor">
+            <summary>
+            Creates a new instance of the ResourcePool class.
+            </summary>
+        </member>
+        <member name="M:Photon.Deterministic.ResourcePool`1.ResetResourcePool">
+            <summary>
+            Removes all cached resources.
+            So they can get garbage collected.
+            </summary>
+        </member>
+        <member name="M:Photon.Deterministic.ResourcePool`1.GiveBack(`0)">
+            <summary>
+            Gives a resource back to the pool.
+            </summary>
+            <param name="obj">The resource to give back</param>
+        </member>
+        <member name="M:Photon.Deterministic.ResourcePool`1.GetNew">
+            <summary>
+            Get a free resource.
+            </summary>
+            <returns>The free resource.</returns>
+        </member>
+        <member name="T:Photon.Deterministic.SyncedData">
+             @brief Represents the synchronized input information from every player for every game tick.
+            
+        </member>
+        <member name="F:Photon.Deterministic.SyncedData.OFFSET_PLAYER_ID">
+             @brief Offset of playerId value in the encoded byteArray
+            
+        </member>
+        <member name="F:Photon.Deterministic.SyncedData.OFFSET_DROP_INFO">
+             @brief Offset of dropInfo value in the encoded byteArray
+            
+        </member>
+        <member name="F:Photon.Deterministic.SyncedData.OFFSET_INPUT_DATA_SIZE">
+             @brief Offset of input data's size in the encoded byteArray
+            
+        </member>
+        <member name="F:Photon.Deterministic.SyncedData.inputData">
+             @brief Player's inputs.
+            
+        </member>
+        <member name="F:Photon.Deterministic.SyncedData.tick">
+             @brief Related game simulation's tick.
+            
+        </member>
+        <member name="F:Photon.Deterministic.SyncedData.fake">
+             @brief If true this input information is not valid, it is only a fake representation.
+            
+        </member>
+        <member name="F:Photon.Deterministic.SyncedData.dirty">
+             @brief If true this input information is not reliable, it is dirty because the related tick is still in a rollback process.
+            
+        </member>
+        <member name="F:Photon.Deterministic.SyncedData.dropPlayer">
+             @brief If true indicates that this player should be dropped.
+            
+        </member>
+        <member name="M:Photon.Deterministic.SyncedData.Init(System.Byte,System.Int32)">
+             @brief Inits a new {@link SyncedData} related to a player's id and a game tick.
+            
+        </member>
+        <member name="M:Photon.Deterministic.SyncedData.GetEncodedHeader(System.Byte[],System.Int32@)">
+             @brief Returns header information encoded in a byte list.
+            
+        </member>
+        <member name="M:Photon.Deterministic.SyncedData.Decode(System.Byte[],System.Int32,System.Int32)">
+             @brief Returns an array of {@link SyncedData} decoded from a byte array.
+            
+        </member>
+        <member name="M:Photon.Deterministic.SyncedData.Encode(Photon.Deterministic.SyncedData,System.Byte[],System.Int32)">
+             @brief Returns an array of {@link SyncedData} encoded in a byte array.
+            
+        </member>
+        <member name="M:Photon.Deterministic.SyncedData.clone">
+             @brief Returns a clone of this {@link SyncedData}.
+            
+        </member>
+        <member name="M:Photon.Deterministic.SyncedData.EqualsData(Photon.Deterministic.SyncedData)">
+             @brief Returns true if this {@link SyncedData} has all actions information equals to the provided one.
+            
+        </member>
+        <member name="T:Photon.Deterministic.SyncedInfo">
+             @brief Represents a synchronized message sent to all players for checksum verification and to allow a synced game start.
+            
+        </member>
+        <member name="F:Photon.Deterministic.SyncedInfo.CHECKSUM_LENGTH">
+             @brief Length of the checksum text.
+            
+        </member>
+        <member name="F:Photon.Deterministic.SyncedInfo.playerId">
+             @brief Player's id.
+            
+        </member>
+        <member name="F:Photon.Deterministic.SyncedInfo.tick">
+             @brief Related game simulation's tick.
+            
+        </member>
+        <member name="F:Photon.Deterministic.SyncedInfo.checksum">
+             @brief Checksum for the related tick.
+            
+        </member>
+        <member name="M:Photon.Deterministic.SyncedInfo.EncodeStartupInfo(Photon.Deterministic.IDeterministicConfigCore)">
+             @brief Returns in a byte array some information needed by truesync's server plugin.
+            
+        </member>
+        <member name="M:Photon.Deterministic.SyncedInfo.Encode(Photon.Deterministic.SyncedInfo)">
+             @brief Returns an array of {@link SyncedData} encoded in a byte array.
+            
+        </member>
+        <member name="M:Photon.Deterministic.SyncedInfo.Decode(System.Byte[])">
+             @brief Returns an array of {@link SyncedData} decoded from a byte array.
+            
+        </member>
+        <member name="T:Photon.Deterministic.Utils">
+             @brief An utility class used across TrueSync's core.
+            
+        </member>
+        <member name="M:Photon.Deterministic.Utils.GetMembersInfo(System.Type)">
+              @brief Returns MemberInfos (FieldInfo and PropertyInfo) of a specified Type.
+            
+        </member>
+        <member name="M:Photon.Deterministic.Utils.GetMd5Sum(System.String)">
+             @brief Returns a md5 hash representation of the provided string.
+            
+        </member>
+        <member name="T:Photon.Deterministic.InputData">
+             @brief Provides information about a player's inputs.
+            
+        </member>
+        <member name="F:Photon.Deterministic.InputData.stringTable">
+             @brief Contains data about string values.
+            
+        </member>
+        <member name="F:Photon.Deterministic.InputData.byteTable">
+             @brief Contains data about byte values.
+            
+        </member>
+        <member name="F:Photon.Deterministic.InputData.intTable">
+             @brief Contains data about int values.
+            
+        </member>
+        <member name="F:Photon.Deterministic.InputData.fpTable">
+             @brief Contains data about FP values.
+            
+        </member>
+        <member name="F:Photon.Deterministic.InputData.byteArrayTable">
+             @brief Contains data about byte[] values.
+            
+        </member>
+        <member name="F:Photon.Deterministic.InputData.fpVector3Table">
+             @brief Contains data about FPVector3 values.
+            
+        </member>
+        <member name="F:Photon.Deterministic.InputData.fpVector2Table">
+             @brief Contains data about FPVector2 values.
+            
+        </member>
+        <member name="T:Photon.Deterministic.InputData.Types">
+             @brief Possible types of input data.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.Serialize(System.Byte[],System.Int32@)">
+             @brief Serialize current inputs to a byteArray passed as param.
+            
+            
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.Deserialize(System.Byte[],System.Int32@)">
+             @brief Deserialize byteArray and repopulate internal input maps.
+            
+             @TODO Review - high frequency code, executed each frame
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.CleanUp">
+             @brief Cleans up data to be reused.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.CopyFrom(Photon.Deterministic.InputDataBase)">
+             @brief Copies all data from the input passed as param.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.EqualsData(Photon.Deterministic.InputDataBase)">
+             @brief Returns true if this {@link SyncedData} has all actions information equals to the provided one.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.checkEqualsTable(Photon.Deterministic.InputData,Photon.Deterministic.InputData)">
+             @brief Returns true if all information in two {@link InputData} are equals.
+            
+        </member>
+        <member name="P:Photon.Deterministic.InputData.Count">
+             @brief Returns how many key were added.
+            
+        </member>
+        <member name="P:Photon.Deterministic.InputData.CountBytes">
+             @brief Returns the number of bytes needed in serialization process.
+            
+             @TODO Review - high frequency code, executed each frame
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.IsEmpty">
+             @brief Returns true if there is no input information.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.AddString(System.Byte,System.String)">
+             @brief Adds a new string value.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.AddByte(System.Byte,System.Byte)">
+             @brief Adds a new byte value.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.AddByteArray(System.Byte,System.Byte[])">
+             @brief Adds a new byte[] value.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.AddByteArray(System.Byte,System.Byte[],System.Int32,System.Int32)">
+             @brief Adds a new byte[] value.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.AddInt(System.Byte,System.Int32)">
+             @brief Adds a new int value.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.AddFP(System.Byte,Photon.Deterministic.FP)">
+             @brief Adds a new FP value.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.AddFPVector3(System.Byte,Photon.Deterministic.FPVector3)">
+             @brief Adds a new FPVector3 value.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.AddFPVector2(System.Byte,Photon.Deterministic.FPVector2)">
+             @brief Adds a new FPVector2 value.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.GetString(System.Byte)">
+             @brief Gets a string value.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.GetByte(System.Byte)">
+             @brief Gets a byte value.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.GetByteArray(System.Byte)">
+             @brief Gets a byte[] value.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.GetInt(System.Byte)">
+             @brief Gets a int value.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.GetFP(System.Byte)">
+             @brief Gets a FP value.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.GetFPVector3(System.Byte)">
+             @brief Gets a FPVector3 value.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.GetFPVector2(System.Byte)">
+             @brief Gets a FPVector2 value.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.HasString(System.Byte)">
+             @brief Returns true if the key exists.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.HasByte(System.Byte)">
+             @brief Returns true if the key exists.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.HasByteArray(System.Byte)">
+             @brief Returns true if the key exists.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.HasInt(System.Byte)">
+             @brief Returns true if the key exists.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.HasFP(System.Byte)">
+             @brief Returns true if the key exists.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.HasFPVector3(System.Byte)">
+             @brief Returns true if the key exists.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputData.HasFPVector2(System.Byte)">
+             @brief Returns true if the key exists.
+            
+        </member>
+        <member name="T:Photon.Deterministic.InputQueue">
+             @brief Manages player's input information, it is used both to set and get this data.
+            
+        </member>
+        <member name="F:Photon.Deterministic.InputQueue.currentAllInputsData">
+             @brief {@link InputData} from every player.
+            
+        </member>
+        <member name="F:Photon.Deterministic.InputQueue.currentInputData">
+             @brief {@link InputData} from the local player to be used in OnSyncedInput callback.
+            
+        </member>
+        <member name="F:Photon.Deterministic.InputQueue.currentSimulationData">
+             @brief {@link InputData} from the local player to be used in OnSyncedUpdate  callback.
+            
+        </member>
+        <member name="P:Photon.Deterministic.InputQueue.CurrentInputData">
+             @brief {@link InputData} from the local player to be used in OnSyncedInput callback.
+            
+        </member>
+        <member name="P:Photon.Deterministic.InputQueue.CurrentSimulationData">
+             @brief {@link InputData} from the local player to be used in OnSyncedUpdate  callback.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.SetString(System.Byte,System.String)">
+             @brief Adds a string value in player's input.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.SetByte(System.Byte,System.Byte)">
+             @brief Adds a byte value in player's input.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.SetByteArray(System.Byte,System.Byte[])">
+             @brief Adds a byte[] value in player's input.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.SetByteArray(System.Byte,System.Byte[],System.Int32,System.Int32)">
+             @brief Adds a part of byte[] value in player's input, it uses an offset and length to get only what is needed.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.SetBool(System.Byte,System.Boolean)">
+             @brief Adds a bool value in player's input.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.SetInt(System.Byte,System.Int32)">
+             @brief Adds a int value in player's input.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.SetFP(System.Byte,Photon.Deterministic.FP)">
+             @brief Adds a FP value in player's input.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.SetFPVector3(System.Byte,Photon.Deterministic.FPVector3)">
+             @brief Adds a FPVector3 value in player's input.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.SetFPVector2(System.Byte,Photon.Deterministic.FPVector2)">
+             @brief Adds a FPVector2 value in player's input.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.GetAllInputs">
+             @brief Returns a list of {@link InputData} from all players.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.GetPlayerInput(System.Byte)">
+             @brief Returns a {@link InputData} from a specific player.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.GetString(System.Byte)">
+             @brief Returns a string value from player's inputs for the provided key.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.GetString(System.Byte,System.Byte)">
+             @brief Returns a string value from a specific player's inputs.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.GetByte(System.Byte)">
+             @brief Returns a byte value from player's inputs for the provided key.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.GetByte(System.Byte,System.Byte)">
+             @brief Returns a byte value from a specific player's inputs.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.GetByteArray(System.Byte)">
+             @brief Returns a byte[] value from player's inputs for the provided key.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.GetByteArray(System.Byte,System.Byte[]@,System.Int32)">
+             @brief Returns a byte[] value from player's inputs for the provided key.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.GetByteArray(System.Byte,System.Byte)">
+             @brief Returns a byte[] value from a specific player's inputs.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.GetBool(System.Byte)">
+             @brief Returns a bool value from player's inputs for the provided key.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.GetBool(System.Byte,System.Byte)">
+             @brief Returns a bool value from a specific player's inputs.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.GetInt(System.Byte)">
+             @brief Returns an int value from player's inputs for the provided key.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.GetInt(System.Byte,System.Byte)">
+             @brief Returns an int value from a specific player's inputs.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.GetFP(System.Byte)">
+             @brief Returns a FP value from player's inputs for the provided key.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.GetFP(System.Byte,System.Byte)">
+             @brief Returns a FP value from a specific player's inputs.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.GetFPVector3(System.Byte)">
+             @brief Returns a FPVector3 value from player's inputs for the provided key.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.GetFPVector3(System.Byte,System.Byte)">
+             @brief Returns a FPVector3 value from a specific player's inputs.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.GetFPVector2(System.Byte)">
+             @brief Returns a FPVector2 value from player's inputs for the provided key.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.GetFPVector2(System.Byte,System.Byte)">
+             @brief Returns a FPVector2 value from a specific player's inputs.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.HasString(System.Byte)">
+             @brief Returns true if there is a string for the provided key.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.HasString(System.Byte,System.Byte)">
+             @brief Returns true if there is a string for the provided key for a specific player.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.HasByte(System.Byte)">
+             @brief Returns true if there is a byte for the provided key.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.HasByte(System.Byte,System.Byte)">
+             @brief Returns true if there is a byte for the provided key for a specific player.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.HasByteArray(System.Byte)">
+             @brief Returns true if there is a byte[] for the provided key.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.HasByteArray(System.Byte,System.Byte)">
+             @brief Returns true if there is a byte[] for the provided key for a specific player.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.HasBool(System.Byte)">
+             @brief Returns true if there is a bool for the provided key.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.HasBool(System.Byte,System.Byte)">
+             @brief Returns true if there is a bool for the provided key for a specific player.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.HasInt(System.Byte)">
+             @brief Returns true if there is an int for the provided key.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.HasInt(System.Byte,System.Byte)">
+             @brief Returns true if there is an int for the provided key for a specific player.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.HasFP(System.Byte)">
+             @brief Returns true if there is a FP for the provided key.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.HasFP(System.Byte,System.Byte)">
+             @brief Returns true if there is a FP for the provided key for a specific player.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.HasFPVector3(System.Byte)">
+             @brief Returns true if there is a FPVector3 for the provided key.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.HasFPVector3(System.Byte,System.Byte)">
+             @brief Returns true if there is a FPVector3 for the provided key for a specific player.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.HasFPVector2(System.Byte)">
+             @brief Returns true if there is a FPVector2 for the provided key.
+            
+        </member>
+        <member name="M:Photon.Deterministic.InputQueue.HasFPVector2(System.Byte,System.Byte)">
+             @brief Returns true if there is a FPVector2 for the provided key for a specific player.
+            
+        </member>
+        <member name="M:Photon.Deterministic.FP.FastSqrt(Photon.Deterministic.FP)">
+              @brief Same as FP.Sqrt().
+            
+        </member>
+        <member name="M:Photon.Deterministic.FP.FastSin(Photon.Deterministic.FP)">
+              @brief Same as FP.Sin().
+            
+        </member>
+        <member name="M:Photon.Deterministic.FP.FastCos(Photon.Deterministic.FP)">
+              @brief Same as FP.Cos().
+            
+        </member>
+        <member name="T:Photon.Deterministic.FPMatrix">
+            <summary>
+            3x3 Matrix.
+            </summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPMatrix.M11">
+            <summary>
+            M11
+            </summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPMatrix.M12">
+            <summary>
+            M12
+            </summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPMatrix.M13">
+            <summary>
+            M13
+            </summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPMatrix.M21">
+            <summary>
+            M21
+            </summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPMatrix.M22">
+            <summary>
+            M22
+            </summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPMatrix.M23">
+            <summary>
+            M23
+            </summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPMatrix.M31">
+            <summary>
+            M31
+            </summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPMatrix.M32">
+            <summary>
+            M32
+            </summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPMatrix.M33">
+            <summary>
+            M33
+            </summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPMatrix.Identity">
+            <summary>
+            Identity matrix.
+            </summary>
+        </member>
+        <member name="M:Photon.Deterministic.FPMatrix.#ctor(Photon.Deterministic.FP,Photon.Deterministic.FP,Photon.Deterministic.FP,Photon.Deterministic.FP,Photon.Deterministic.FP,Photon.Deterministic.FP,Photon.Deterministic.FP,Photon.Deterministic.FP,Photon.Deterministic.FP)">
+            <summary>
+            Initializes a new instance of the matrix structure.
+            </summary>
+            <param name="m11">m11</param>
+            <param name="m12">m12</param>
+            <param name="m13">m13</param>
+            <param name="m21">m21</param>
+            <param name="m22">m22</param>
+            <param name="m23">m23</param>
+            <param name="m31">m31</param>
+            <param name="m32">m32</param>
+            <param name="m33">m33</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPMatrix.Multiply(Photon.Deterministic.FPMatrix,Photon.Deterministic.FPMatrix)">
+            <summary>
+            Multiply two matrices. Notice: matrix multiplication is not commutative.
+            </summary>
+            <param name="matrix1">The first matrix.</param>
+            <param name="matrix2">The second matrix.</param>
+            <returns>The product of both matrices.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPMatrix.Multiply(Photon.Deterministic.FPMatrix@,Photon.Deterministic.FPMatrix@,Photon.Deterministic.FPMatrix@)">
+            <summary>
+            Multiply two matrices. Notice: matrix multiplication is not commutative.
+            </summary>
+            <param name="matrix1">The first matrix.</param>
+            <param name="matrix2">The second matrix.</param>
+            <param name="result">The product of both matrices.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPMatrix.Add(Photon.Deterministic.FPMatrix,Photon.Deterministic.FPMatrix)">
+            <summary>
+            Matrices are added.
+            </summary>
+            <param name="matrix1">The first matrix.</param>
+            <param name="matrix2">The second matrix.</param>
+            <returns>The sum of both matrices.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPMatrix.Add(Photon.Deterministic.FPMatrix@,Photon.Deterministic.FPMatrix@,Photon.Deterministic.FPMatrix@)">
+            <summary>
+            Matrices are added.
+            </summary>
+            <param name="matrix1">The first matrix.</param>
+            <param name="matrix2">The second matrix.</param>
+            <param name="result">The sum of both matrices.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPMatrix.Inverse(Photon.Deterministic.FPMatrix)">
+            <summary>
+            Calculates the inverse of a give matrix.
+            </summary>
+            <param name="matrix">The matrix to invert.</param>
+            <returns>The inverted JMatrix.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPMatrix.Inverse(Photon.Deterministic.FPMatrix@,Photon.Deterministic.FPMatrix@)">
+            <summary>
+            Calculates the inverse of a give matrix.
+            </summary>
+            <param name="matrix">The matrix to invert.</param>
+            <param name="result">The inverted JMatrix.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPMatrix.Multiply(Photon.Deterministic.FPMatrix,Photon.Deterministic.FP)">
+            <summary>
+            Multiply a matrix by a scalefactor.
+            </summary>
+            <param name="matrix1">The matrix.</param>
+            <param name="scaleFactor">The scale factor.</param>
+            <returns>A JMatrix multiplied by the scale factor.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPMatrix.Multiply(Photon.Deterministic.FPMatrix@,Photon.Deterministic.FP,Photon.Deterministic.FPMatrix@)">
+            <summary>
+            Multiply a matrix by a scalefactor.
+            </summary>
+            <param name="matrix1">The matrix.</param>
+            <param name="scaleFactor">The scale factor.</param>
+            <param name="result">A JMatrix multiplied by the scale factor.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPMatrix.CreateFromLookAt(Photon.Deterministic.FPVector3,Photon.Deterministic.FPVector3)">
+            <summary>
+            Creates a JMatrix representing an orientation from a quaternion.
+            </summary>
+            <param name="quaternion">The quaternion the matrix should be created from.</param>
+            <returns>JMatrix representing an orientation.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPMatrix.CreateFromQuaternion(Photon.Deterministic.FPQuaternion@,Photon.Deterministic.FPMatrix@)">
+            <summary>
+            Creates a JMatrix representing an orientation from a quaternion.
+            </summary>
+            <param name="quaternion">The quaternion the matrix should be created from.</param>
+            <param name="result">JMatrix representing an orientation.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPMatrix.Transpose(Photon.Deterministic.FPMatrix)">
+            <summary>
+            Creates the transposed matrix.
+            </summary>
+            <param name="matrix">The matrix which should be transposed.</param>
+            <returns>The transposed JMatrix.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPMatrix.Transpose(Photon.Deterministic.FPMatrix@,Photon.Deterministic.FPMatrix@)">
+            <summary>
+            Creates the transposed matrix.
+            </summary>
+            <param name="matrix">The matrix which should be transposed.</param>
+            <param name="result">The transposed JMatrix.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPMatrix.op_Multiply(Photon.Deterministic.FPMatrix,Photon.Deterministic.FPMatrix)">
+            <summary>
+            Multiplies two matrices.
+            </summary>
+            <param name="value1">The first matrix.</param>
+            <param name="value2">The second matrix.</param>
+            <returns>The product of both values.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPMatrix.op_Addition(Photon.Deterministic.FPMatrix,Photon.Deterministic.FPMatrix)">
+            <summary>
+            Adds two matrices.
+            </summary>
+            <param name="value1">The first matrix.</param>
+            <param name="value2">The second matrix.</param>
+            <returns>The sum of both values.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPMatrix.op_Subtraction(Photon.Deterministic.FPMatrix,Photon.Deterministic.FPMatrix)">
+            <summary>
+            Subtracts two matrices.
+            </summary>
+            <param name="value1">The first matrix.</param>
+            <param name="value2">The second matrix.</param>
+            <returns>The difference of both values.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPMatrix.CreateFromAxisAngle(Photon.Deterministic.FPVector3@,Photon.Deterministic.FP,Photon.Deterministic.FPMatrix@)">
+            <summary>
+            Creates a matrix which rotates around the given axis by the given angle.
+            </summary>
+            <param name="axis">The axis.</param>
+            <param name="angle">The angle.</param>
+            <param name="result">The resulting rotation matrix</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPMatrix.AngleAxis(Photon.Deterministic.FP,Photon.Deterministic.FPVector3)">
+            <summary>
+            Creates a matrix which rotates around the given axis by the given angle.
+            </summary>
+            <param name="axis">The axis.</param>
+            <param name="angle">The angle.</param>
+            <returns>The resulting rotation matrix</returns>
+        </member>
+        <member name="T:Photon.Deterministic.FPQuaternion">
+            <summary>
+            A Quaternion representing an orientation.
+            </summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPQuaternion.x">
+            <summary>The X component of the quaternion.</summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPQuaternion.y">
+            <summary>The Y component of the quaternion.</summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPQuaternion.z">
+            <summary>The Z component of the quaternion.</summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPQuaternion.w">
+            <summary>The W component of the quaternion.</summary>
+        </member>
+        <member name="M:Photon.Deterministic.FPQuaternion.#ctor(Photon.Deterministic.FP,Photon.Deterministic.FP,Photon.Deterministic.FP,Photon.Deterministic.FP)">
+            <summary>
+            Initializes a new instance of the JQuaternion structure.
+            </summary>
+            <param name="x">The X component of the quaternion.</param>
+            <param name="y">The Y component of the quaternion.</param>
+            <param name="z">The Z component of the quaternion.</param>
+            <param name="w">The W component of the quaternion.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPQuaternion.Add(Photon.Deterministic.FPQuaternion,Photon.Deterministic.FPQuaternion)">
+            <summary>
+            Quaternions are added.
+            </summary>
+            <param name="quaternion1">The first quaternion.</param>
+            <param name="quaternion2">The second quaternion.</param>
+            <returns>The sum of both quaternions.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPQuaternion.Add(Photon.Deterministic.FPQuaternion@,Photon.Deterministic.FPQuaternion@,Photon.Deterministic.FPQuaternion@)">
+            <summary>
+            Quaternions are added.
+            </summary>
+            <param name="quaternion1">The first quaternion.</param>
+            <param name="quaternion2">The second quaternion.</param>
+            <param name="result">The sum of both quaternions.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPQuaternion.Subtract(Photon.Deterministic.FPQuaternion,Photon.Deterministic.FPQuaternion)">
+            <summary>
+            Quaternions are subtracted.
+            </summary>
+            <param name="quaternion1">The first quaternion.</param>
+            <param name="quaternion2">The second quaternion.</param>
+            <returns>The difference of both quaternions.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPQuaternion.Subtract(Photon.Deterministic.FPQuaternion@,Photon.Deterministic.FPQuaternion@,Photon.Deterministic.FPQuaternion@)">
+            <summary>
+            Quaternions are subtracted.
+            </summary>
+            <param name="quaternion1">The first quaternion.</param>
+            <param name="quaternion2">The second quaternion.</param>
+            <param name="result">The difference of both quaternions.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPQuaternion.Multiply(Photon.Deterministic.FPQuaternion,Photon.Deterministic.FPQuaternion)">
+            <summary>
+            Multiply two quaternions.
+            </summary>
+            <param name="quaternion1">The first quaternion.</param>
+            <param name="quaternion2">The second quaternion.</param>
+            <returns>The product of both quaternions.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPQuaternion.Multiply(Photon.Deterministic.FPQuaternion@,Photon.Deterministic.FPQuaternion@,Photon.Deterministic.FPQuaternion@)">
+            <summary>
+            Multiply two quaternions.
+            </summary>
+            <param name="quaternion1">The first quaternion.</param>
+            <param name="quaternion2">The second quaternion.</param>
+            <param name="result">The product of both quaternions.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPQuaternion.Multiply(Photon.Deterministic.FPQuaternion,Photon.Deterministic.FP)">
+            <summary>
+            Scale a quaternion
+            </summary>
+            <param name="quaternion1">The quaternion to scale.</param>
+            <param name="scaleFactor">Scale factor.</param>
+            <returns>The scaled quaternion.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPQuaternion.Multiply(Photon.Deterministic.FPQuaternion@,Photon.Deterministic.FP,Photon.Deterministic.FPQuaternion@)">
+            <summary>
+            Scale a quaternion
+            </summary>
+            <param name="quaternion1">The quaternion to scale.</param>
+            <param name="scaleFactor">Scale factor.</param>
+            <param name="result">The scaled quaternion.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPQuaternion.Normalize">
+            <summary>
+            Sets the length of the quaternion to one.
+            </summary>
+        </member>
+        <member name="M:Photon.Deterministic.FPQuaternion.CreateFromMatrix(Photon.Deterministic.FPMatrix)">
+            <summary>
+            Creates a quaternion from a matrix.
+            </summary>
+            <param name="matrix">A matrix representing an orientation.</param>
+            <returns>JQuaternion representing an orientation.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPQuaternion.CreateFromMatrix(Photon.Deterministic.FPMatrix@,Photon.Deterministic.FPQuaternion@)">
+            <summary>
+            Creates a quaternion from a matrix.
+            </summary>
+            <param name="matrix">A matrix representing an orientation.</param>
+            <param name="result">JQuaternion representing an orientation.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPQuaternion.op_Multiply(Photon.Deterministic.FPQuaternion,Photon.Deterministic.FPQuaternion)">
+            <summary>
+            Multiply two quaternions.
+            </summary>
+            <param name="value1">The first quaternion.</param>
+            <param name="value2">The second quaternion.</param>
+            <returns>The product of both quaternions.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPQuaternion.op_Addition(Photon.Deterministic.FPQuaternion,Photon.Deterministic.FPQuaternion)">
+            <summary>
+            Add two quaternions.
+            </summary>
+            <param name="value1">The first quaternion.</param>
+            <param name="value2">The second quaternion.</param>
+            <returns>The sum of both quaternions.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPQuaternion.op_Subtraction(Photon.Deterministic.FPQuaternion,Photon.Deterministic.FPQuaternion)">
+            <summary>
+            Subtract two quaternions.
+            </summary>
+            <param name="value1">The first quaternion.</param>
+            <param name="value2">The second quaternion.</param>
+            <returns>The difference of both quaternions.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPQuaternion.op_Multiply(Photon.Deterministic.FPQuaternion,Photon.Deterministic.FPVector3)">
+              @brief Rotates a {@link TSVector} by the {@link TSQuanternion}.
+            
+        </member>
+        <member name="T:Photon.Deterministic.FPRandom">
+              @brief Generates random numbers based on a deterministic approach.
+            
+        </member>
+        <member name="F:Photon.Deterministic.FPRandom.instance">
+              @brief Static instance of {@link TSRandom} with seed 1.
+            
+        </member>
+        <member name="P:Photon.Deterministic.FPRandom.State">
+              @brief State can be serialised and restored for rollback systems. Use carefully.
+            
+        </member>
+        <member name="M:Photon.Deterministic.FPRandom.InitState(System.Int32)">
+              @brief Generates a new instance based on a given seed.
+            
+        </member>
+        <member name="M:Photon.Deterministic.FPRandom.Range(System.Int32,System.Int32)">
+              @brief Returns a integer between a min value [inclusive] and a max value [exclusive].
+            
+        </member>
+        <member name="M:Photon.Deterministic.FPRandom.Range(Photon.Deterministic.FP,Photon.Deterministic.FP)">
+              @brief Returns a {@link FP} between a min value [inclusive] and a max value [inclusive].
+            
+        </member>
+        <member name="P:Photon.Deterministic.FPRandom.value">
+              @brief Returns a {@link FP} between 0.0 [inclusive] and 1.0 [inclusive].
+            
+        </member>
+        <member name="P:Photon.Deterministic.FPRandom.insideUnitSphere">
+              @brief Returns a random {@link TSVector} representing a point inside a sphere with radius 1.
+            
+        </member>
+        <member name="P:Photon.Deterministic.FPRandom.Value">
+              @brief Returns a {@link FP} between 0.0 [inclusive] and 1.0 [inclusive].
+            
+        </member>
+        <member name="T:Photon.Deterministic.FPVector3">
+            <summary>
+            A vector structure.
+            </summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPVector3.x">
+            <summary>The X component of the vector.</summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPVector3.y">
+            <summary>The Y component of the vector.</summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPVector3.z">
+            <summary>The Z component of the vector.</summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPVector3.zero">
+            <summary>
+            A vector with components (0,0,0);
+            </summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPVector3.left">
+            <summary>
+            A vector with components (-1,0,0);
+            </summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPVector3.right">
+            <summary>
+            A vector with components (1,0,0);
+            </summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPVector3.up">
+            <summary>
+            A vector with components (0,1,0);
+            </summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPVector3.down">
+            <summary>
+            A vector with components (0,-1,0);
+            </summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPVector3.back">
+            <summary>
+            A vector with components (0,0,-1);
+            </summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPVector3.forward">
+            <summary>
+            A vector with components (0,0,1);
+            </summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPVector3.one">
+            <summary>
+            A vector with components (1,1,1);
+            </summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPVector3.MinValue">
+            <summary>
+            A vector with components 
+            (FP.MinValue,FP.MinValue,FP.MinValue);
+            </summary>
+        </member>
+        <member name="F:Photon.Deterministic.FPVector3.MaxValue">
+            <summary>
+            A vector with components 
+            (FP.MaxValue,FP.MaxValue,FP.MaxValue);
+            </summary>
+        </member>
+        <member name="P:Photon.Deterministic.FPVector3.sqrMagnitude">
+            <summary>
+            Gets the squared length of the vector.
+            </summary>
+            <returns>Returns the squared length of the vector.</returns>
+        </member>
+        <member name="P:Photon.Deterministic.FPVector3.magnitude">
+            <summary>
+            Gets the length of the vector.
+            </summary>
+            <returns>Returns the length of the vector.</returns>
+        </member>
+        <member name="P:Photon.Deterministic.FPVector3.normalized">
+            <summary>
+            Gets a normalized version of the vector.
+            </summary>
+            <returns>Returns a normalized version of the vector.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Constructor initializing a new instance of the structure
+            </summary>
+            <param name="x">The X component of the vector.</param>
+            <param name="y">The Y component of the vector.</param>
+            <param name="z">The Z component of the vector.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Scale(Photon.Deterministic.FPVector3)">
+            <summary>
+            Multiplies each component of the vector by the same components of the provided vector.
+            </summary>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Set(Photon.Deterministic.FP,Photon.Deterministic.FP,Photon.Deterministic.FP)">
+            <summary>
+            Sets all vector component to specific values.
+            </summary>
+            <param name="x">The X component of the vector.</param>
+            <param name="y">The Y component of the vector.</param>
+            <param name="z">The Z component of the vector.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.#ctor(Photon.Deterministic.FP)">
+            <summary>
+            Constructor initializing a new instance of the structure
+            </summary>
+            <param name="xyz">All components of the vector are set to xyz</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.ToString">
+            <summary>
+            Builds a string from the JVector.
+            </summary>
+            <returns>A string containing all three components.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Equals(System.Object)">
+            <summary>
+            Tests if an object is equal to this vector.
+            </summary>
+            <param name="obj">The object to test.</param>
+            <returns>Returns true if they are euqal, otherwise false.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Scale(Photon.Deterministic.FPVector3,Photon.Deterministic.FPVector3)">
+            <summary>
+            Multiplies each component of the vector by the same components of the provided vector.
+            </summary>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.op_Equality(Photon.Deterministic.FPVector3,Photon.Deterministic.FPVector3)">
+            <summary>
+            Tests if two JVector are equal.
+            </summary>
+            <param name="value1">The first value.</param>
+            <param name="value2">The second value.</param>
+            <returns>Returns true if both values are equal, otherwise false.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.op_Inequality(Photon.Deterministic.FPVector3,Photon.Deterministic.FPVector3)">
+            <summary>
+            Tests if two JVector are not equal.
+            </summary>
+            <param name="value1">The first value.</param>
+            <param name="value2">The second value.</param>
+            <returns>Returns false if both values are equal, otherwise true.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Min(Photon.Deterministic.FPVector3,Photon.Deterministic.FPVector3)">
+            <summary>
+            Gets a vector with the minimum x,y and z values of both vectors.
+            </summary>
+            <param name="value1">The first value.</param>
+            <param name="value2">The second value.</param>
+            <returns>A vector with the minimum x,y and z values of both vectors.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Min(Photon.Deterministic.FPVector3@,Photon.Deterministic.FPVector3@,Photon.Deterministic.FPVector3@)">
+            <summary>
+            Gets a vector with the minimum x,y and z values of both vectors.
+            </summary>
+            <param name="value1">The first value.</param>
+            <param name="value2">The second value.</param>
+            <param name="result">A vector with the minimum x,y and z values of both vectors.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Max(Photon.Deterministic.FPVector3,Photon.Deterministic.FPVector3)">
+            <summary>
+            Gets a vector with the maximum x,y and z values of both vectors.
+            </summary>
+            <param name="value1">The first value.</param>
+            <param name="value2">The second value.</param>
+            <returns>A vector with the maximum x,y and z values of both vectors.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Max(Photon.Deterministic.FPVector3@,Photon.Deterministic.FPVector3@,Photon.Deterministic.FPVector3@)">
+            <summary>
+            Gets a vector with the maximum x,y and z values of both vectors.
+            </summary>
+            <param name="value1">The first value.</param>
+            <param name="value2">The second value.</param>
+            <param name="result">A vector with the maximum x,y and z values of both vectors.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.MakeZero">
+            <summary>
+            Sets the length of the vector to zero.
+            </summary>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.IsZero">
+            <summary>
+            Checks if the length of the vector is zero.
+            </summary>
+            <returns>Returns true if the vector is zero, otherwise false.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.IsNearlyZero">
+            <summary>
+            Checks if the length of the vector is nearly zero.
+            </summary>
+            <returns>Returns true if the vector is nearly zero, otherwise false.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Transform(Photon.Deterministic.FPVector3,Photon.Deterministic.FPMatrix)">
+            <summary>
+            Transforms a vector by the given matrix.
+            </summary>
+            <param name="position">The vector to transform.</param>
+            <param name="matrix">The transform matrix.</param>
+            <returns>The transformed vector.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Transform(Photon.Deterministic.FPVector3@,Photon.Deterministic.FPMatrix@,Photon.Deterministic.FPVector3@)">
+            <summary>
+            Transforms a vector by the given matrix.
+            </summary>
+            <param name="position">The vector to transform.</param>
+            <param name="matrix">The transform matrix.</param>
+            <param name="result">The transformed vector.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.TransposedTransform(Photon.Deterministic.FPVector3@,Photon.Deterministic.FPMatrix@,Photon.Deterministic.FPVector3@)">
+            <summary>
+            Transforms a vector by the transposed of the given Matrix.
+            </summary>
+            <param name="position">The vector to transform.</param>
+            <param name="matrix">The transform matrix.</param>
+            <param name="result">The transformed vector.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Dot(Photon.Deterministic.FPVector3,Photon.Deterministic.FPVector3)">
+            <summary>
+            Calculates the dot product of two vectors.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>Returns the dot product of both vectors.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Dot(Photon.Deterministic.FPVector3@,Photon.Deterministic.FPVector3@)">
+            <summary>
+            Calculates the dot product of both vectors.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>Returns the dot product of both vectors.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Add(Photon.Deterministic.FPVector3,Photon.Deterministic.FPVector3)">
+            <summary>
+            Adds two vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <returns>The sum of both vectors.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Add(Photon.Deterministic.FPVector3@,Photon.Deterministic.FPVector3@,Photon.Deterministic.FPVector3@)">
+            <summary>
+            Adds to vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <param name="result">The sum of both vectors.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Divide(Photon.Deterministic.FPVector3,Photon.Deterministic.FP)">
+            <summary>
+            Divides a vector by a factor.
+            </summary>
+            <param name="value1">The vector to divide.</param>
+            <param name="scaleFactor">The scale factor.</param>
+            <returns>Returns the scaled vector.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Divide(Photon.Deterministic.FPVector3@,Photon.Deterministic.FP,Photon.Deterministic.FPVector3@)">
+            <summary>
+            Divides a vector by a factor.
+            </summary>
+            <param name="value1">The vector to divide.</param>
+            <param name="scaleFactor">The scale factor.</param>
+            <param name="result">Returns the scaled vector.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Subtract(Photon.Deterministic.FPVector3,Photon.Deterministic.FPVector3)">
+            <summary>
+            Subtracts two vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <returns>The difference of both vectors.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Subtract(Photon.Deterministic.FPVector3@,Photon.Deterministic.FPVector3@,Photon.Deterministic.FPVector3@)">
+            <summary>
+            Subtracts to vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <param name="result">The difference of both vectors.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Cross(Photon.Deterministic.FPVector3,Photon.Deterministic.FPVector3)">
+            <summary>
+            The cross product of two vectors.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <returns>The cross product of both vectors.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Cross(Photon.Deterministic.FPVector3@,Photon.Deterministic.FPVector3@,Photon.Deterministic.FPVector3@)">
+            <summary>
+            The cross product of two vectors.
+            </summary>
+            <param name="vector1">The first vector.</param>
+            <param name="vector2">The second vector.</param>
+            <param name="result">The cross product of both vectors.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.GetHashCode">
+            <summary>
+            Gets the hashcode of the vector.
+            </summary>
+            <returns>Returns the hashcode of the vector.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Negate">
+            <summary>
+            Inverses the direction of the vector.
+            </summary>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Negate(Photon.Deterministic.FPVector3)">
+            <summary>
+            Inverses the direction of a vector.
+            </summary>
+            <param name="value">The vector to inverse.</param>
+            <returns>The negated vector.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Negate(Photon.Deterministic.FPVector3@,Photon.Deterministic.FPVector3@)">
+            <summary>
+            Inverses the direction of a vector.
+            </summary>
+            <param name="value">The vector to inverse.</param>
+            <param name="result">The negated vector.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Normalize(Photon.Deterministic.FPVector3)">
+            <summary>
+            Normalizes the given vector.
+            </summary>
+            <param name="value">The vector which should be normalized.</param>
+            <returns>A normalized vector.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Normalize">
+            <summary>
+            Normalizes this vector.
+            </summary>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Normalize(Photon.Deterministic.FPVector3@,Photon.Deterministic.FPVector3@)">
+            <summary>
+            Normalizes the given vector.
+            </summary>
+            <param name="value">The vector which should be normalized.</param>
+            <param name="result">A normalized vector.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Swap(Photon.Deterministic.FPVector3@,Photon.Deterministic.FPVector3@)">
+            <summary>
+            Swaps the components of both vectors.
+            </summary>
+            <param name="vector1">The first vector to swap with the second.</param>
+            <param name="vector2">The second vector to swap with the first.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Multiply(Photon.Deterministic.FPVector3,Photon.Deterministic.FP)">
+            <summary>
+            Multiply a vector with a factor.
+            </summary>
+            <param name="value1">The vector to multiply.</param>
+            <param name="scaleFactor">The scale factor.</param>
+            <returns>Returns the multiplied vector.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.Multiply(Photon.Deterministic.FPVector3@,Photon.Deterministic.FP,Photon.Deterministic.FPVector3@)">
+            <summary>
+            Multiply a vector with a factor.
+            </summary>
+            <param name="value1">The vector to multiply.</param>
+            <param name="scaleFactor">The scale factor.</param>
+            <param name="result">Returns the multiplied vector.</param>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.op_Modulus(Photon.Deterministic.FPVector3,Photon.Deterministic.FPVector3)">
+            <summary>
+            Calculates the cross product of two vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <returns>Returns the cross product of both.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.op_Multiply(Photon.Deterministic.FPVector3,Photon.Deterministic.FPVector3)">
+            <summary>
+            Calculates the dot product of two vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <returns>Returns the dot product of both.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.op_Multiply(Photon.Deterministic.FPVector3,Photon.Deterministic.FP)">
+            <summary>
+            Multiplies a vector by a scale factor.
+            </summary>
+            <param name="value1">The vector to scale.</param>
+            <param name="value2">The scale factor.</param>
+            <returns>Returns the scaled vector.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.op_Multiply(Photon.Deterministic.FP,Photon.Deterministic.FPVector3)">
+            <summary>
+            Multiplies a vector by a scale factor.
+            </summary>
+            <param name="value2">The vector to scale.</param>
+            <param name="value1">The scale factor.</param>
+            <returns>Returns the scaled vector.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.op_Subtraction(Photon.Deterministic.FPVector3,Photon.Deterministic.FPVector3)">
+            <summary>
+            Subtracts two vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <returns>The difference of both vectors.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.op_Addition(Photon.Deterministic.FPVector3,Photon.Deterministic.FPVector3)">
+            <summary>
+            Adds two vectors.
+            </summary>
+            <param name="value1">The first vector.</param>
+            <param name="value2">The second vector.</param>
+            <returns>The sum of both vectors.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector3.op_Division(Photon.Deterministic.FPVector3,Photon.Deterministic.FP)">
+            <summary>
+            Divides a vector by a factor.
+            </summary>
+            <param name="value1">The vector to divide.</param>
+            <param name="scaleFactor">The scale factor.</param>
+            <returns>Returns the scaled vector.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector2.#ctor(Photon.Deterministic.FP,Photon.Deterministic.FP)">
+            <summary>
+            Constructor foe standard 2D vector.
+            </summary>
+            <param name="x">
+            A <see cref="T:System.Single"/>
+            </param>
+            <param name="y">
+            A <see cref="T:System.Single"/>
+            </param>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector2.#ctor(Photon.Deterministic.FP)">
+            <summary>
+            Constructor for "square" vector.
+            </summary>
+            <param name="value">
+            A <see cref="T:System.Single"/>
+            </param>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector2.Distance(Photon.Deterministic.FPVector2,Photon.Deterministic.FPVector2)">
+            <summary>
+            Returns FP precison distanve between two vectors
+            </summary>
+            <param name="value1">
+            A <see cref="T:Photon.Deterministic.FPVector2"/>
+            </param>
+            <param name="value2">
+            A <see cref="T:Photon.Deterministic.FPVector2"/>
+            </param>
+            <returns>
+            A <see cref="T:System.Single"/>
+            </returns>
+        </member>
+        <member name="M:Photon.Deterministic.FPVector2.Divide(Photon.Deterministic.FPVector2,Photon.Deterministic.FPVector2)">
+            <summary>
+            Devide first vector with the secund vector
+            </summary>
+            <param name="value1">
+            A <see cref="T:Photon.Deterministic.FPVector2"/>
+            </param>
+            <param name="value2">
+            A <see cref="T:Photon.Deterministic.FPVector2"/>
+            </param>
+            <returns>
+            A <see cref="T:Photon.Deterministic.FPVector2"/>
+            </returns>
+        </member>
+        <member name="T:Photon.Deterministic.MathUtils">
+            <summary>
+            Contains common math operations.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Photon.Deterministic.MathUtils.Max(Photon.Deterministic.FP,Photon.Deterministic.FP)" -->
+        <member name="M:Photon.Deterministic.MathUtils.Min(Photon.Deterministic.FP,Photon.Deterministic.FP)">
+            <summary>
+            Gets the minimum number of two values.
+            </summary>
+            <param name="val1">The first value.</param>
+            <param name="val2">The second value.</param>
+            <returns>Returns the smallest value.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.MathUtils.Max(Photon.Deterministic.FP,Photon.Deterministic.FP,Photon.Deterministic.FP)">
+            <summary>
+            Gets the maximum number of three values.
+            </summary>
+            <param name="val1">The first value.</param>
+            <param name="val2">The second value.</param>
+            <param name="val3">The third value.</param>
+            <returns>Returns the largest value.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.MathUtils.Clamp(Photon.Deterministic.FP,Photon.Deterministic.FP,Photon.Deterministic.FP)">
+            <summary>
+            Returns a number which is within [min,max]
+            </summary>
+            <param name="value">The value to clamp.</param>
+            <param name="min">The minimum value.</param>
+            <param name="max">The maximum value.</param>
+            <returns>The clamped value.</returns>
+        </member>
+        <member name="M:Photon.Deterministic.MathUtils.Absolute(Photon.Deterministic.FPMatrix@,Photon.Deterministic.FPMatrix@)">
+            <summary>
+            Changes every sign of the matrix entry to '+'
+            </summary>
+            <param name="matrix">The matrix.</param>
+            <param name="result">The absolute matrix.</param>
+        </member>
+    </members>
+</doc>

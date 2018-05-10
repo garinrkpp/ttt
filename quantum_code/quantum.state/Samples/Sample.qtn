@@ -1,0 +1,53 @@
+﻿asset CharacterSpec;
+
+component Resources {
+    FP Health;
+
+}
+
+entity Projectile[64] {
+    use Transform2D;
+    use DynamicBody;
+    fields{
+        entity_ref<Character> Source;
+        FP Time;
+    }
+}
+
+entity Character[8] { 
+    use Transform2D;
+    use DynamicBody;
+    use Resources;
+    use Prefab;
+    fields {
+        player_ref Player;
+        asset_ref<CharacterSpec> CharacterSpec;
+    }
+}
+
+input {
+    FPVector2 Movement;
+    button Fire;
+}
+
+abstract event CharacterEvent {
+    entity_ref<Character> Character;
+}
+
+event CharacterDamage : CharacterEvent {
+    FP Damage;
+}
+
+enum DamageType {
+    Magical, Physical
+}
+
+struct DamageData {
+    entity_ref<Character> Character;
+    FP Damage;
+    DamageType Type;
+}
+
+signal OnDamage(DamageData dmg);
+
+signal OnDamageBefore(DamageData* dmg);
